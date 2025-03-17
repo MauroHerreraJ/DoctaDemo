@@ -22,7 +22,7 @@ const AllButtons = () => {
         
         // La barra de progreso se llenó
         enviarEvento("ALARM");
-        setShowProgressBar(false);
+        setShowProgressBar(false); 
       }
     });
   };
@@ -41,7 +41,8 @@ const AllButtons = () => {
     Vibration.vibrate(500);
     try {
       const result = await savePost({
-        eventCode: "107"
+       trama : "EVT;1003;171;0",
+	     protocolo : "BSAS"
       });
       console.log(`${eventType} enviado`, result);
     } catch (error) {

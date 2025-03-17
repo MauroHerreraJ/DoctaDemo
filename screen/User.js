@@ -7,34 +7,6 @@ import { useFocusEffect } from '@react-navigation/native';
 function User() {
   const [licencia, setLicencia] = useState(null);
 
-  // Función para traducir el estado
-  const translateStatus = (status) => {
-    switch (status) {
-      case 'active':
-        return 'Activo';
-      case 'inactive':
-        return 'Inactivo';
-      case 'pending':
-        return 'Pendiente';
-      case 'expired':
-        return 'Expirado';
-      case 'accepted':
-        return 'Aceptado';  // Traducción de "accepted"
-      default:
-        return status; // Si no se encuentra una traducción, se muestra el valor original
-    }
-  };
-  const maskLicenseCode = (code) => {
-    if (!code) return ''; // Devuelve una cadena vacía si code es null o undefined
-    if (code.length >= 4) {
-      // Reemplazar los últimos 4 caracteres con asteriscos
-      return code.slice(0, -4) + '****';
-
-    }
-    return code; // Si el código tiene menos de 24 caracteres, se devuelve tal cual
-  };
-  
-
   // Función para recuperar la licencia almacenada
   const loadLicencia = async () => {
     try {
@@ -64,60 +36,17 @@ function User() {
   }, []);
 
   const Borrar = async () => {
-    await AsyncStorage.removeItem('@licencias');
+    await AsyncStorage.removeItem('código');
     console.log('borrado');
   };
 
   //Verifica si hay datos de licencia para mostrar
-  if (!licencia) {
-    return (
-      <>
-      
-        <View style={styles.withoutLicenseContainer}>
-          <View >
-            <Text style={styles.withoutLicense}>No posee Licencia...</Text>
-          </View>
-          <View style={styles.withoutLicenseImage}>
-            <Image source={require("../assets/logonuevo.png")}
-              style={{ width: 59, height: 59 }} />
-          </View>
-          <View>
-            <Text style={styles.textImage}>Producto desarrollado por Desit SA</Text>
-          </View>
-        </View>
-      </>
-    );
-  }
+ 
 
   return (
     <>
    
-      <View style={styles.dataContainer}>
-        <View>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Cuenta: </Text>
-            <Text style={styles.textData}>{licencia.accountNumber}</Text>
-            <View style={styles.underline}></View>
-          </View>
-          <View style={styles.textContainer}>
-          <Text style={styles.text}>Licencia: </Text>
-          <Text style={styles.textData}>{maskLicenseCode(licencia.code)}</Text> 
-          <View style={styles.underline}></View>
-        </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Equipo: </Text>
-            <Text style={styles.textData}>{licencia.targetDeviceCode}</Text>
-            <View style={styles.underline}></View>
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Estado </Text>
-            <Text style={styles.textData}>
-              {licencia.status ? translateStatus(licencia.status) : 'Desconocido'}
-            </Text>
-            <View style={styles.underline}></View>
-          </View>
-        </View>
-      <View style={styles.container2}>
+     
        
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logonuevo.png")}
@@ -129,8 +58,8 @@ function User() {
       <View>
         <Text style={styles.textImage}>Producto desarrollado por Desit SA</Text>
       </View>
-          </View>
-     </View>
+          
+    
     </>
   );
 }
@@ -169,6 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   imageContainer: {
+    marginTop:550,
     alignItems: "center",
     marginBottom: 20
   },

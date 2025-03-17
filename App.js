@@ -22,7 +22,7 @@ function AuthorizedNavigation() {
     <BottomTabs.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: '#0d47a1', height: 120 },
-        headerTintColor: "white",
+        headerTintColor: "white", 
       }}>
 
       <BottomTabs.Screen
@@ -104,7 +104,7 @@ export default function App() {
         await SplashScreen.preventAutoHideAsync();
         // Preload fonts or any other task
         await new Promise(resolve => setTimeout(resolve, 2000));
-        const data = await AsyncStorage.getItem('@licencias');
+        const data = await AsyncStorage.getItem('código');
         if (data !== null) {
           setIsAuthorized(true); // Usuario ya configurado
         }
