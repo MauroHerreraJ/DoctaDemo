@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "DoctaPánicoCerrado",
+    "slug": "DesitApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logonuevo.png", 
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logonuevo.png",
+      "resizeMode": "contain",  
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.herreramauro.DesitApp"
+    },
+    "android": {
+      "versionCode":7,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.herreramauro.DesitAppCerrado1"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d9fe4711-d46d-4d9f-ad34-c6f33e2152be"
+      }
+    }
+  }
+}
