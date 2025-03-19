@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "DoctaPánicoCerrado",
-    "slug": "DesitApp",
+    "slug": "doctapanico",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logonuevo.png", 
@@ -16,7 +16,7 @@
       "bundleIdentifier": "com.herreramauro.DesitApp"
     },
     "android": {
-      "versionCode":7,
+      "versionCode":8,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

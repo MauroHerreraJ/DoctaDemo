@@ -1,11 +1,9 @@
-import { View, Text, TextInput, ActivityIndicator, Platform, Pressable } from "react-native";
+import { View, TextInput, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-import { postUserData } from "../util/Api"; 
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Dimensions } from "react-native";
 
 import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,7 +16,7 @@ function Configuration() {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const storedValue = await AsyncStorage.getItem("código");
+                const storedValue = await AsyncStorage.getItem("API_URL");
                 if (storedValue) {
                     setCodigo(storedValue);
                 }
@@ -32,15 +30,13 @@ function Configuration() {
     // Guardar dato en AsyncStorage
     const saveData = async () => {
         try {
-            await AsyncStorage.setItem("código", codigo);
+            await AsyncStorage.setItem("API_URL", codigo);
             console.log("Código guardado:", codigo);
             navigation.replace('Principal');
         } catch (error) {
             console.error("Error al guardar el código:", error);
-            
         }
     };
-
     return (
         <>
             <KeyboardAwareScrollView
@@ -150,11 +146,11 @@ const styles = StyleSheet.create({
     icon2: {
         marginLeft: 10
     },
-    title:{
-        marginTop:10,
-        marginLeft:21,
+    title: {
+        marginTop: 10,
+        marginLeft: 21,
     },
-    titleText:{
+    titleText: {
         fontSize: 17,
         fontFamily: "open-sans-bold",
     }

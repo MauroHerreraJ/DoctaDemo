@@ -13,6 +13,7 @@ import AllButtons from './screen/AllButtons';
 import Configuration from './screen/Configuration';
 import User from './screen/User';
 import welcome from './screen/Welcome';
+import GrabarBorrar from './component/GrabarBorrar';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -22,14 +23,14 @@ function AuthorizedNavigation() {
     <BottomTabs.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: '#0d47a1', height: 120 },
-        headerTintColor: "white", 
+        headerTintColor: "white",
       }}>
 
       <BottomTabs.Screen
         name='Desit'
         component={AllButtons}
         options={{
-          title: "Desit",
+          title: "DoctaPánico",
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (<Ionicons name='home-outline' size={size} color={color} />),
           headerLeft: () => (
@@ -67,10 +68,11 @@ function NoAuthorizedNavigation() {
       <BottomTabs.Screen
         name="Welcome"
         component={welcome}
-        
-        options={{headerShown:false,
+
+        options={{
+          headerShown: false,
           tabBarStyle: { display: 'none' },
-          tabBarIcon:({color,size})=> <Ionicons name='home-outline' size={size} color={color}/>
+          tabBarIcon: ({ color, size }) => <Ionicons name='home-outline' size={size} color={color} />
         }}
       />
 
@@ -104,7 +106,7 @@ export default function App() {
         await SplashScreen.preventAutoHideAsync();
         // Preload fonts or any other task
         await new Promise(resolve => setTimeout(resolve, 2000));
-        const data = await AsyncStorage.getItem('código');
+        const data = await AsyncStorage.getItem("API_URL");
         if (data !== null) {
           setIsAuthorized(true); // Usuario ya configurado
         }
@@ -130,46 +132,55 @@ export default function App() {
   return (
     <>
       <StatusBar style='light' />
-      
-       
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName={isAuthorized ? "Principal" : "Secondary"}>
-            
-              <Stack.Screen
-                name="Secondary"
-                component={NoAuthorizedNavigation}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Principal"
-                component={AuthorizedNavigation}
-                options={{ headerShown: false }}
-              />
-                <Stack.Screen
-              name='Welcome'
-              component={welcome}
-            />
-              <Stack.Screen
-                name="User"
-                component={User}
+
+
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={isAuthorized ? "Principal" : "Secondary"}>
+
+          <Stack.Screen
+            name="Secondary"
+            component={NoAuthorizedNavigation}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Principal"
+            component={AuthorizedNavigation}
+            options={{ headerShown: false }}
+          />
+           <Stack.Screen
+                name="GrabarBorrar"
+                component={GrabarBorrar}
                 options={{
-                  presentation: "modal",
-                  title: "Información del Sistema",
+                  title: "Borrar",
                   headerStyle: { backgroundColor: '#0d47a1' },
-                  headerTintColor: "white"
+                  headerTintColor: "white",
                 }}
               />
-              <Stack.Screen
-                name="Configuration"
-                component={Configuration}
-              />
-              <Stack.Screen
-                name="Home"
-                component={AllButtons}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-         
+          <Stack.Screen
+            name='Welcome'
+            component={welcome}
+          />
+          <Stack.Screen
+            name="User"
+            component={User}
+            options={{
+              presentation: "modal",
+              title: "Información del Sistema",
+              headerStyle: { backgroundColor: '#0d47a1' },
+              headerTintColor: "white"
+            }}
+          />
+          <Stack.Screen
+            name="Configuration"
+            component={Configuration}
+          />
+          <Stack.Screen
+            name="Home"
+            component={AllButtons}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+
     </>
   );
 }

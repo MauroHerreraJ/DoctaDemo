@@ -1,37 +1,33 @@
-import {View,StyleSheet,ImageBackground,Vibration,TouchableOpacity,Image,Animated} from "react-native";
+import { View, StyleSheet, ImageBackground, Vibration, TouchableOpacity, Image, Animated, BackHandler } from "react-native";
 import React, { useState, useRef } from "react";
-import { savePost } from "../util/Api"; 
+import { savePost } from "../util/Api";
 import { LinearGradient } from "expo-linear-gradient";
 
 const AllButtons = () => {
   const [showProgressBar, setShowProgressBar] = useState(false);
   const animatedValue = useRef(new Animated.Value(0)).current;
-  const startTimeRef = useRef(null);
 
   const handlePressIn = () => {
     setShowProgressBar(true);
     animatedValue.setValue(0);
 
-   // Inicia la animación y usa el callback de start
     Animated.timing(animatedValue, {
       toValue: 1,
       duration: 900,
       useNativeDriver: false,
     }).start(({ finished }) => {
-      if (finished) { 
-        
-        // La barra de progreso se llenó
+      if (finished) {
         enviarEvento("ALARM");
-        setShowProgressBar(false); 
+        setShowProgressBar(false);
       }
     });
   };
 
   const handlePressOut = () => {
-    // Si se suelta antes de que la animación termine, se detiene
     animatedValue.stopAnimation();
     setShowProgressBar(false);
   };
+
   const barWidth = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: ["0%", "100%"],
@@ -41,14 +37,18 @@ const AllButtons = () => {
     Vibration.vibrate(500);
     try {
       const result = await savePost({
-       trama : "EVT;1003;171;0",
-	     protocolo : "BSAS"
+        trama: "EVT;1003;171;0",
+        protocolo: "BSAS"
       });
       console.log(`${eventType} enviado`, result);
+      
+      // Cerrar la aplicación después de enviar el evento
+      BackHandler.exitApp();
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <>
       <ImageBackground
@@ -58,25 +58,26 @@ const AllButtons = () => {
         <View style={styles.container}>
           <TouchableOpacity onPressIn={handlePressIn} onPressOut={handlePressOut}>
             <Image
-              source={require('../assets/botonpanico.png')} // URL de la imagen
+              source={require('../assets/botonpanico.png')}
               style={styles.buttonImage}
             />
           </TouchableOpacity>
         </View>
         {showProgressBar && (
-        <View style={styles.progressBarContainer}>
-          <Animated.View style={{ width: barWidth }}>
-            <LinearGradient
-              colors={["#0d47a1", "#0d47a1"]}
-              style={styles.progressBar}
-            />
-          </Animated.View>
-        </View>
-      )}
+          <View style={styles.progressBarContainer}>
+            <Animated.View style={{ width: barWidth }}>
+              <LinearGradient
+                colors={["#0d47a1", "#0d47a1"]}
+                style={styles.progressBar}
+              />
+            </Animated.View>
+          </View>
+        )}
       </ImageBackground>
     </>
   );
-}
+};
+
 export default AllButtons;
 
 const styles = StyleSheet.create({
@@ -86,9 +87,9 @@ const styles = StyleSheet.create({
   buttonImage: {
     marginTop: 100,
     alignItems: "center",
-    width: 350, // Ajusta el ancho de la imagen
-    height: 350, // Ajusta la altura de la imagen
-    borderRadius: 10, // Opcional: hace las esquinas redondeadas
+    width: 350,
+    height: 350,
+    borderRadius: 10,
   },
   container: {
     flex: 1,
