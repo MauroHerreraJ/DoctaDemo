@@ -16,12 +16,12 @@
       "bundleIdentifier": "com.herreramauro.DesitApp"
     },
     "android": {
-      "versionCode":8,
+      "versionCode":9,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.herreramauro.DesitAppCerrado1"
+      "package": "com.herreramauro.DesitAppCerrado"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,7 +31,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "d9fe4711-d46d-4d9f-ad34-c6f33e2152be"
+        "projectId": "fe285d99-7b07-4109-bd6c-5cd63844c7b1"
       }
     }
   }

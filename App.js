@@ -36,7 +36,7 @@ function AuthorizedNavigation() {
           headerLeft: () => (
             <Image
               source={require("./assets/logonuevo.png")}
-              style={{ width: 43, height: 43, marginLeft: 10 }}
+              style={{ width: 43, height: 43, marginLeft: 110 }}
             />
           ),
         }} />
