@@ -1,7 +1,9 @@
-import { View, StyleSheet, ImageBackground, Vibration, TouchableOpacity, Image, Animated, BackHandler } from "react-native";
+import { View, StyleSheet, ImageBackground, Vibration, TouchableOpacity, Image, Animated, BackHandler, Dimensions } from "react-native";
 import React, { useState, useRef } from "react";
 import { savePost } from "../util/Api";
 import { LinearGradient } from "expo-linear-gradient";
+
+const { width, height } = Dimensions.get("window"); // Obtener dimensiones de la pantalla
 
 const AllButtons = () => {
   const [showProgressBar, setShowProgressBar] = useState(false);
@@ -42,7 +44,6 @@ const AllButtons = () => {
       });
       console.log(`${eventType} enviado`, result);
       
-      // Cerrar la aplicación después de enviar el evento
       BackHandler.exitApp();
     } catch (error) {
       console.error(error);
@@ -50,31 +51,29 @@ const AllButtons = () => {
   };
 
   return (
-    <>
-      <ImageBackground
-        source={require('../assets/126353.jpg')}
-        resizeMode="cover"
-        style={styles.rootScreen}>
-        <View style={styles.container}>
-          <TouchableOpacity onPressIn={handlePressIn} onPressOut={handlePressOut}>
-            <Image
-              source={require('../assets/botonpanico.png')}
-              style={styles.buttonImage}
+    <ImageBackground
+      source={require('../assets/126353.jpg')}
+      resizeMode="cover"
+      style={styles.rootScreen}>
+      <View style={styles.container}>
+        <TouchableOpacity onPressIn={handlePressIn} onPressOut={handlePressOut}>
+          <Image
+            source={require('../assets/botonpanico.png')}
+            style={[styles.buttonImage, { width: width * 0.9, height: width * 0.9 }]} // Escalado dinámico
+          />
+        </TouchableOpacity>
+      </View>
+      {showProgressBar && (
+        <View style={styles.progressBarContainer}>
+          <Animated.View style={{ width: barWidth }}>
+            <LinearGradient
+              colors={["#0d47a1", "#0d47a1"]}
+              style={styles.progressBar}
             />
-          </TouchableOpacity>
+          </Animated.View>
         </View>
-        {showProgressBar && (
-          <View style={styles.progressBarContainer}>
-            <Animated.View style={{ width: barWidth }}>
-              <LinearGradient
-                colors={["#0d47a1", "#0d47a1"]}
-                style={styles.progressBar}
-              />
-            </Animated.View>
-          </View>
-        )}
-      </ImageBackground>
-    </>
+      )}
+    </ImageBackground>
   );
 };
 
@@ -82,13 +81,10 @@ export default AllButtons;
 
 const styles = StyleSheet.create({
   rootScreen: {
-    flex: 1
+    flex: 1,
   },
   buttonImage: {
-    marginTop: 100,
     alignItems: "center",
-    width: 350,
-    height: 350,
     borderRadius: 10,
   },
   container: {

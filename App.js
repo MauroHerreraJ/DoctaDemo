@@ -32,11 +32,14 @@ function AuthorizedNavigation() {
         options={{
           title: "DoctaPánico",
           tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => (<Ionicons name='home-outline' size={size} color={color} />),
+          tabBarIcon: ({ color, size }) => (
+          <Ionicons name='home-outline' size={size} color={color} />
+        ),
+        
           headerLeft: () => (
             <Image
               source={require("./assets/logonuevo.png")}
-              style={{ width: 43, height: 43, marginLeft: 110 }}
+              style={{ width: 40, height: 40, marginLeft: 110 }}
             />
           ),
         }} />

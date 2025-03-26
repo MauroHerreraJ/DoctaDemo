@@ -13,7 +13,7 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal"
-    },
+    }, 
     "preview": {
       "distribution": "internal"
     },
@@ -21,7 +21,8 @@
       "distribution": "store",
       "android": {
         "buildType": "app-bundle"
-      }
+      },
+      "autoIncrement": true
     },
     "adhoc": {
       "distribution": "internal",
