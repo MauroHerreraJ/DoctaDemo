@@ -1,7 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const BASE_URL = "https://"; // 🔹 Parte fija de la URL
+const BASE_URL = "https:/"; // 🔹 Parte fija de la URL
 
 const getApiUrl = async () => {
   try {

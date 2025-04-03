@@ -1,6 +1,8 @@
 import { View, Text, Image, StyleSheet, Platform, ImageBackground, Pressable, ScrollView } from "react-native";
 import { useState } from "react";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { Dimensions } from "react-native";
+
+const { height } = Dimensions.get("window");
 
 function Welcome({ navigation }) {
 
@@ -179,7 +181,9 @@ const styles = StyleSheet.create({
         marginTop: 80
     },
     buttonContainer: {
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: height * 0.05,  // Ajuste dinámico basado en la altura de la pantalla
+        alignItems: "center",
     },
     button: {
         padding: 16,
@@ -228,8 +232,8 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     checkbox: {
-        width: 26,
-        height: 26,
+        width: 30,
+        height: 30,
         borderWidth: 2,
         borderColor: "#0d47a1",
         borderRadius: 4,

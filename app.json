@@ -1,19 +1,22 @@
 {
   "expo": {
-    "name": "DoctaPánicoCerrado",
+    "name": "DoctaPánico",
     "slug": "doctapanico",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logonuevo.png", 
+    "icon": "./assets/logonuevo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/logonuevo.png",
-      "resizeMode": "contain",  
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.herreramauro.DesitApp"
+      "bundleIdentifier": "com.herreramauro.DesitApp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "versionCode": 9,

@@ -4,6 +4,8 @@ import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Dimensions } from "react-native";
+const { height,width } = Dimensions.get("window");
 
 import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,6 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function Configuration() {
     const [codigo, setCodigo] = useState("");
     const navigation = useNavigation();
+    
 
     // Cargar el dato guardado al iniciar la pantalla
     useEffect(() => {
@@ -69,12 +72,11 @@ function Configuration() {
 export default Configuration;
 
 const styles = StyleSheet.create({
-    rootScreen: {
-        flex: 1,
-    },
+   
     button: {
-        marginTop: 55,
-        alignSelf: "stretch",
+        marginTop: 10,
+        marginBottom: height * 0.05,  // Ajuste dinámico basado en la altura de la pantalla
+        alignItems: "center",
     },
     imputContainer: {
         padding: 20,
