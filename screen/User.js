@@ -1,37 +1,32 @@
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ClaveModal from "../UI/ClaveModal";
 
 function User({ navigation }) {
-  const [url, setUrl] = useState("");
+  const [cuenta, setCuenta] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isBorrarAccess, setIsBorrarAccess] = useState(false);
 
   useEffect(() => {
-    const loadUrl = async () => {
+    const loadCuenta = async () => {
       try {
-        const storedUrl = await AsyncStorage.getItem("API_URL");
-        if (storedUrl) {
-          setUrl(`https://${storedUrl}`); // 🔹 Se concatena "https://" si es necesario
+        const storedCuenta = await AsyncStorage.getItem("Cuenta");
+        if (storedCuenta) {
+          setCuenta(storedCuenta);
         } else {
-          setUrl("No hay una URL guardada");
+          setCuenta("No hay una cuenta guardada");
         }
       } catch (error) {
-        console.error("Error al obtener la URL:", error);
-        setUrl("Error al cargar la URL");
+        console.error("Error al obtener la cuenta:", error);
+        setCuenta("Error al cargar la cuenta");
       }
     };
-
-    loadUrl();
+  
+    loadCuenta();
   }, []);
-
-
-  const Borrar = async () => {
-    await AsyncStorage.removeItem("API_URL");
-    console.log('borrado');
-  };
+  
   const openClaveModal = () => {
     setIsModalVisible(true); // Mostrar modal para ingresar la clave
   };  
@@ -51,8 +46,8 @@ function User({ navigation }) {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.label}>URL Guardada:</Text>
-        <Text style={styles.url}>{url}</Text>
+        <Text style={styles.label}>Número de cuenta:</Text>
+        <Text style={styles.url}>{cuenta}</Text>
       </View>
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logonuevo.png")}
@@ -106,7 +101,7 @@ const styles = StyleSheet.create({
   },
   url: {
     fontSize: 16,
-    color: "#333",
+    color: "bold",
     textAlign: "center",
   },
 });
