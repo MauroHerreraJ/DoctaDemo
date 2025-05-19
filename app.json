@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.herreramauro.DesitAppCerrado"
+      "package": "com.herreramauro.DesitAppCerrado1"
     },
     "web": {
       "favicon": "./assets/favicon.png"

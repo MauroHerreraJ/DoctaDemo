@@ -44,7 +44,7 @@ const AllButtons = () => {
       const cuenta = numeroAlmacenado ? numeroAlmacenado : "0"; // Si no hay número, usa "0"
 
       // Reemplazar el signo de interrogación en la trama
-      const tramaReemplazada = `EVT;${cuenta};171;0`;
+      const tramaReemplazada = `EVT;${cuenta};107;0`;
       console.log(tramaReemplazada)
 
       const result = await savePost({
